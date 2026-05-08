@@ -1,17 +1,20 @@
 # namer_app
 
-A new Flutter project.
+this is my first flutter app. it generates random word pairs and you can save the ones you like as favorites.
 
-## Getting Started
+i made this while learning flutter. still figuring out how state management works but provider seems okay.
 
-This project is a starting point for a Flutter application.
+## what it does
 
-A few resources to get you started if this is your first Flutter project:
+- shows a random word pair on screen
+- you can click like to save it
+- there is a favorites page to see all saved words
+- the sidebar changes depending on screen size
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## how to run
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+make sure flutter is installed then run:
+
+```
+flutter run
+```

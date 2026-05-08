@@ -6,7 +6,7 @@ void main() {
   runApp(
     ChangeNotifierProvider(
       create: (context) => MyAppState(),
-      child: const MyApp(),
+      child: MyApp(),
     ),
   );
 }
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
       ),
-      home: const MyHomePage(),
+      home: MyHomePage(),
     );
   }
 }
@@ -58,16 +58,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // show different page depending on which tab is selected
     Widget page;
-    switch (selectedIndex) {
-      case 0:
-        page = const GeneratorPage();
-        break;
-      case 1:
-        page = const FavoritesPage();
-        break;
-      default:
-        throw UnimplementedError('no widget for $selectedIndex');
+    if (selectedIndex == 0) {
+      page = GeneratorPage();
+    } else if (selectedIndex == 1) {
+      page = FavoritesPage();
+    } else {
+      page = GeneratorPage();
     }
 
     return LayoutBuilder(
@@ -78,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
               SafeArea(
                 child: NavigationRail(
                   extended: constraints.maxWidth >= 600,
-                  destinations: const [
+                  destinations: [
                     NavigationRailDestination(
                       icon: Icon(Icons.home),
                       label: Text('Home'),
@@ -130,7 +128,7 @@ class GeneratorPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           BigCard(pair: pair),
-          const SizedBox(height: 10),
+          SizedBox(height: 10),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -139,14 +137,14 @@ class GeneratorPage extends StatelessWidget {
                   appState.toggleFavorite();
                 },
                 icon: Icon(icon),
-                label: const Text('Like'),
+                label: Text('Like'),
               ),
-              const SizedBox(width: 10),
+              SizedBox(width: 10),
               ElevatedButton(
                 onPressed: () {
                   appState.getNext();
                 },
-                child: const Text('Next'),
+                child: Text('Next'),
               ),
             ],
           ),
@@ -163,8 +161,8 @@ class BigCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final style = theme.textTheme.displayMedium!.copyWith(
+    var theme = Theme.of(context);
+    var style = theme.textTheme.displayMedium!.copyWith(
       color: theme.colorScheme.onPrimary,
     );
 
@@ -175,7 +173,6 @@ class BigCard extends StatelessWidget {
         child: Text(
           pair.asLowerCase,
           style: style,
-          semanticsLabel: '${pair.first} ${pair.second}',
         ),
       ),
     );
@@ -191,7 +188,7 @@ class FavoritesPage extends StatelessWidget {
     var favorites = appState.favorites;
 
     if (favorites.isEmpty) {
-      return const Center(
+      return Center(
         child: Text('No favorites yet.'),
       );
     }
@@ -204,7 +201,7 @@ class FavoritesPage extends StatelessWidget {
         ),
         for (var pair in favorites)
           ListTile(
-            leading: const Icon(Icons.favorite),
+            leading: Icon(Icons.favorite),
             title: Text(pair.asLowerCase),
           ),
       ],
